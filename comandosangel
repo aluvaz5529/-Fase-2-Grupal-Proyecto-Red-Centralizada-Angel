@@ -1,3 +1,23 @@
 #esto es para instalar el active directory
 
 PS C:\> Install-WindowsFeature –Name AD-Domain-Services –IncludeManagementTools
+
+#Dominio secundario
+
+Import-Module ADDSDeployment
+Install-ADDSDomain `
+-NoGlobalCatalog:$false `
+-CreateDnsDelegation:$true `
+-Credential (Get-Credential) `
+-DatabasePath "C:\Windows\NTDS" `
+-DomainMode "WinThreshold" `
+-DomainType "ChildDomain" `
+-InstallDns:$true `
+-LogPath "C:\Windows\NTDS" `
+-NewDomainName "castellon" `
+-NewDomainNetbiosName "CASTELLON" `
+-ParentDomainName "upv.es" `
+-NoRebootOnCompletion:$false `
+-SiteName "Default-First-Site-Name" `
+-SysvolPath "C:\Windows\SYSVOL" `
+-Force:$true
